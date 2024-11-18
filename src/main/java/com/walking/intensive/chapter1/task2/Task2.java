@@ -37,8 +37,45 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        // Проверка на корректность ввода
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            return "Некорректные входные данные";
+        }
+        // Количество квартир в доме
+        int flatsPerFloor = 4;
+        int flatsPerEntrance = flatsPerFloor * floorAmount;
+        int totalFlats = flatsPerEntrance * entranceAmount; // Общее количество квартир в доме
+        // Проверка на существование квартиры
+        if (flatNumber > totalFlats) {
+            return "Такой квартиры не существует";
+        }
+        // Номер подъезда
+        int entranceNumber = (flatNumber - 1) / flatsPerEntrance + 1;
+        // Номер квартиры в подъезде
+        int flatInEntrance = (flatNumber - 1) % flatsPerEntrance;
+        // Номер этажа
+        int floorNumber = (flatInEntrance / flatsPerFloor) + 1;
+        // Номер квартиры на этаже
+        int flatOnFloor = (flatInEntrance % flatsPerFloor) + 1;
+        // Определение расположения относительно лифта
+        String positionRelativeToElevator;
+        String direction;
+        // Определение позиции и направления
+        if (flatOnFloor == 1) {
+            positionRelativeToElevator = "слева от лифта";
+            direction = "влево";
+        } else if (flatOnFloor == 2) {
+            positionRelativeToElevator = "слева от лифта";
+            direction = "вправо";
+        } else if (flatOnFloor == 3) {
+            positionRelativeToElevator = "справа от лифта";
+            direction = "влево";
+        } else { // flatOnFloor == 4
+            positionRelativeToElevator = "справа от лифта";
+            direction = "вправо";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, "
+                + positionRelativeToElevator + ", " + direction;
     }
 }
