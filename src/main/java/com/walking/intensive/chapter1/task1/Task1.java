@@ -24,6 +24,11 @@ public class Task1 {
 
         String ageString;
 
+        // Проверка на некорректный ввод
+        if (age < 0) {
+            return "Некорректный ввод";
+        }
+
         // Определяем правильное окончание
         if (age % 10 == 1 && age % 100 != 11) {
             ageString = "год";
