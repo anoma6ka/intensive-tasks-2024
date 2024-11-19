@@ -29,8 +29,18 @@ public class Task3 {
     }
 
     static boolean isLeap(int year) {
-        //Место для вашего кода
+        // Проверка на некорректный год
+        if (year <= 0) {
+            return false;
+        }
 
-        return false; // Заглушка. При реализации - удалить
+        // Определение високосного года
+        if (year % 4 == 0) {
+            if (year % 100 == 0) {
+                return 0 == year % 400; // год кратен 400
+            }
+            return true; // год кратен 4
+        }
+        return false; // не високосный год
     }
 }
